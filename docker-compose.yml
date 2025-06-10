@@ -95,20 +95,7 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  ingress:
-    image: nginx:1
-    container_name: opnform-ingress
-    volumes:
-      - ./docker/nginx.conf:/etc/nginx/templates/default.conf.template
-    ports:
-      - 80:80
-    environment:
-      - NGINX_MAX_BODY_SIZE=64m
-    depends_on:
-      api:
-        condition: service_started
-      ui:
-        condition: service_started
+
     healthcheck:
       test: ["CMD-SHELL", "nginx -t && curl -f http://localhost/ || exit 1"]
       interval: 30s
