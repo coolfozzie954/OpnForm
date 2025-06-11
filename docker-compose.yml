@@ -65,6 +65,8 @@ services:
     container_name: opnform-client
     env_file:
       - ./client/.env
+    expose:
+      - "3000"
     healthcheck:
       test: ["CMD-SHELL", "wget --spider -q http://localhost:3000/login || exit 1"]
       interval: 30s
