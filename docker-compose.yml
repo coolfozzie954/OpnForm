@@ -63,8 +63,10 @@ services:
   ui:
     image: jhumanj/opnform-client:latest
     container_name: opnform-client
-    env_file:
-      - ./client/.env
+    environment:
+      NUXT_PUBLIC_API_URL: "https://forms.crescentsix.com/api"
+      NUXT_PORT: 3000
+      NUXT_HOST: "0.0.0.0"
     expose:
       - "3000"
     healthcheck:
@@ -73,6 +75,8 @@ services:
       timeout: 10s
       retries: 3
       start_period: 45s
+    env_file:
+      - ./client/.env
 
   redis:
     image: redis:7
